@@ -1,0 +1,9 @@
+{
+	"name": "@spazmodius/fastGuid",
+	"version": "0.1.0",
+	"description": "a very fast generator of RFC4122 version 4 UUIDs",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/spazmodius/fastGuid.git"
+	}
+}
