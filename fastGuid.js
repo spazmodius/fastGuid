@@ -17,28 +17,24 @@ module.exports = (function() {
 		return buf
 	}
 	
-	function formatWith(sep, buf) {
-		return  hex[buf[0]] + hex[buf[1]] + hex[buf[2]] + hex[buf[3]] + sep +
-			hex[buf[4]] + hex[buf[5]] + sep +
-			hex[buf[6]] + hex[buf[7]] + sep +
-			hex[buf[8]] + hex[buf[9]] + sep +
-			hex[buf[10]] + hex[buf[11]] + hex[buf[12]] + hex[buf[13]] + hex[buf[14]]
-	}
-	
-	function surroundWith(braces, text) {
-		return braces? braces[0] + text + braces[1]: text
-	}
-	
 	function generator(sep, braces) {
-		var format = formatWith.bind(null, sep || '')
-		var surround = surroundWith.bind(null, braces)
+		var leftBrace = braces && braces.charAt(0) || '' , rightBrace = braces && braces.charAt(1) || ''
+
+		function format(buf) {
+			return  leftBrace + hex[buf[0]] + hex[buf[1]] + hex[buf[2]] + hex[buf[3]] + sep +
+				hex[buf[4]] + hex[buf[5]] + sep +
+				hex[buf[6]] + hex[buf[7]] + sep +
+				hex[buf[8]] + hex[buf[9]] + sep +
+				hex[buf[10]] + hex[buf[11]] + hex[buf[12]] + hex[buf[13]] + hex[buf[14]]
+		}
+		
 		var formatted15, i = 255
 		return function() {
 			if (++i >= 256) {
 				formatted15 = format( v4_15() )
 				i = 0
 			}
-			return surround(formatted15 + hex[i])
+			return formatted15 + hex[i] + rightBrace
 		}
 	}
 	
