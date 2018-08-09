@@ -6,5 +6,9 @@
 		"type": "git",
 		"url": "git://github.com/spazmodius/fastGuid.git"
 	},
-	"main": "fastGuid.js"
+	"main": "fastGuid.js",
+	"devDependencies": {
+		"bench": "^0.3.6",
+		"uuid": "^3.3.2"
+	}
 }
