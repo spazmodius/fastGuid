@@ -17,8 +17,8 @@ console.log(fastGuid.B())     // {f908f12a-28bc-4a80-961f-62226b4d0f01}
 ```
 
 ## Note
-This UUID generator is freakishly fast, and generates _unique_ UUIDs, in conformance with the [RFC](https://www.ietf.org/rfc/rfc4122.txt).  But it __does not__ generate _unguessable_ UUIDs.  In particulary, sequences of 256 UUIDs 
-will differ only in the last byte.  So if you've generated one, it's very easy to guess the next one.
+This UUID generator is freakishly fast, and generates _unique_ UUIDs, in conformance with the [RFC](https://tools.ietf.org/html/rfc4122).  But it __does not__ generate _unguessable_ UUIDs.  In particulary, sequences of 256 UUIDs
+will differ only in the last byte.  So if you've generated one, it's pretty easy to guess the next one.
 
-However, you should not be using UUIDs for unguessable secrets anyway; that is explicitly not one of their
+However, you [should not be using UUIDs for unguessable secrets](https://tools.ietf.org/html/rfc4122#section-6) anyway; that is explicitly not one of their
 properties.  They are intended to be unique, not unguessable; please use a cryptographically random source if you need secrets.
