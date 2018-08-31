@@ -1,7 +1,7 @@
 {
 	"name": "@spazmodius/fastGuid",
-	"version": "0.2.3",
-	"description": "a very fast generator of RFC4122 version 4 UUIDs",
+	"version": "1.0.0",
+	"description": "Blazingly fast UUIDs in Node.js",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/spazmodius/fastGuid.git"
@@ -10,5 +10,8 @@
 	"devDependencies": {
 		"@spazmodius/hrbench": "github:spazmodius/hrbench",
 		"uuid": "^3.3.2"
+	},
+	"dependencies": {
+		"flatstr": "^1.0.8"
 	}
 }

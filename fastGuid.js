@@ -1,38 +1,54 @@
+'use strict'
+const { randomBytes } = require('crypto')
+const flatstr = require('flatstr')
 
 const hex = new Array(256)
-for (let i = 0xff; i >= 0x10; --i)
-	hex[i] = i.toString(16)
-for (let i = 0xf; i >= 0; --i)
+for (let i = 0; i <= 0xf; ++i)
 	hex[i] = '0' + i.toString(16)
+for (let i = 0x10; i <= 0xff; ++i)
+	hex[i] = i.toString(16)
 
-const crypto = require('crypto')
-const random_15 = () => crypto.randomBytes(15)
 
 function v4_15() {
-	const buf = random_15()
+	const buf = randomBytes(15)
 	buf[6] = (buf[6] & 0x0F) | 0x40
 	buf[8] = (buf[8] & 0x3F) | 0x80
-	return buf
+	return buf.toString('hex')
 }
 
-function format(buf, leftBrace, sep) {
-	return  leftBrace + hex[buf[0]] + hex[buf[1]] + hex[buf[2]] + hex[buf[3]] + sep +
-		hex[buf[4]] + hex[buf[5]] + sep +
-		hex[buf[6]] + hex[buf[7]] + sep +
-		hex[buf[8]] + hex[buf[9]] + sep +
-		hex[buf[10]] + hex[buf[11]] + hex[buf[12]] + hex[buf[13]] + hex[buf[14]]
+function addDashes(hex) {
+	return  flatstr(hex.slice(0, 8) + '-' + hex.slice(8, 12) + '-' + hex.slice(12, 16) + '-' + hex.slice(16, 20) + '-' + hex.slice(20))
 }
 
-function generator(sep, braces) {
-	const leftBrace = braces && braces.charAt(0) || '' , rightBrace = braces && braces.charAt(1) || ''
-	let formatted15, i = 255
-	return function() {
-		if (++i >= 256) {
-			formatted15 = format( v4_15(), leftBrace, sep )
-			i = 0
-		}
-		return formatted15 + hex[i] + rightBrace
+function surroundWithBraces(dashed) {
+	return '{' + dashed + '}'
+}
+
+let hex15, dashed15 = null, lowByte = 255
+
+function next() {
+	if (++lowByte === 256) {
+		hex15 = v4_15()
+		dashed15 = null
+		// dashed15 = addDashes(hex15)
+		lowByte = 0
 	}
+}
+
+function N() {
+	next()
+	return hex15 + hex[lowByte]
+}
+
+function D() {
+	next()
+	if (dashed15 === null)
+		dashed15 = addDashes(hex15)
+	return dashed15 + hex[lowByte]
+}
+
+function B() {
+	return surroundWithBraces(D())
 }
 
 function fastGuid(formatSpecifier) {
@@ -42,8 +58,8 @@ function fastGuid(formatSpecifier) {
 	return generate()
 }
 
-fastGuid.D = generator('-')
-fastGuid.N = generator('')
-fastGuid.B = generator('-', '{}')
+fastGuid.D = D
+fastGuid.N = N
+fastGuid.B = B
 
 module.exports = fastGuid
