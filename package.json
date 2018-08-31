@@ -8,7 +8,7 @@
 	},
 	"main": "fastGuid.js",
 	"devDependencies": {
-		"bench": "^0.3.6",
+		"@spazmodius/hrbench": "github:spazmodius/hrbench",
 		"uuid": "^3.3.2"
 	}
 }
