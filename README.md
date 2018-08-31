@@ -1,6 +1,9 @@
 # Spaz's fastGuid
 Blazingly fast UUIDs in Node.js.
 
+## Install
+`npm install spazmodius/fastGuid`
+
 ## Usage
 ```
 var fastGuid = require('@spazmodius/fastGuid')
