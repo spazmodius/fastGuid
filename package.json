@@ -1,6 +1,6 @@
 {
 	"name": "@spazmodius/fastGuid",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Blazingly fast UUIDs in Node.js",
 	"repository": {
 		"type": "git",

@@ -1,19 +1,19 @@
 'use strict'
-const { randomBytes } = require('crypto')
 const flatstr = require('flatstr')
+const BUFFERSIZE = 150
+const randomBuffer = require('./random')(BUFFERSIZE)
+const hex = require('./hex')
 
-const hex = new Array(256)
-for (let i = 0; i <= 0xf; ++i)
-	hex[i] = '0' + i.toString(16)
-for (let i = 0x10; i <= 0xff; ++i)
-	hex[i] = i.toString(16)
-
+let buffer = null, index = BUFFERSIZE
 
 function v4_15() {
-	const buf = randomBytes(15)
-	buf[6] = (buf[6] & 0x0F) | 0x40
-	buf[8] = (buf[8] & 0x3F) | 0x80
-	return buf.toString('hex')
+	if (index >= BUFFERSIZE) {
+		buffer = randomBuffer()
+		index = 0
+	}
+	buffer[index + 6] = (buffer[index + 6] & 0x0F) | 0x40
+	buffer[index + 8] = (buffer[index + 8] & 0x3F) | 0x80
+	return buffer.toString('hex', index, index += 15)
 }
 
 function addDashes(hex) {
@@ -30,7 +30,6 @@ function next() {
 	if (++lowByte === 256) {
 		hex15 = v4_15()
 		dashed15 = null
-		// dashed15 = addDashes(hex15)
 		lowByte = 0
 	}
 }
