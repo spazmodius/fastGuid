@@ -1,7 +1,7 @@
 'use strict'
 const Benchmark = require('@spazmodius/hrbench')
 const uuid = require('uuid')
-const fastguid = require('./fastGuid')
+const fastguid = require('../fastGuid')
 
 new Benchmark()
 	.test('uuid', uuid)
