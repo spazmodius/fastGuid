@@ -6,17 +6,17 @@ Blazingly fast UUIDs in Node.js.
 
 ## Usage
 ```
-var fastGuid = require('@spazmodius/fastGuid')
+const fastGuid = require('@spazmodius/fastGuid')
 
-console.log(fastGuid())       // 056548da-d1ba-49aa-a181-d5d6f29a7300
-console.log(fastGuid('D'))    // 056548da-d1ba-49aa-a181-d5d6f29a7301
-console.log(fastGuid('N'))    // a1d40e3af9a84ec8bf9afa746f2e0200
-console.log(fastGuid('B'))    // {f908f12a-28bc-4a80-961f-62226b4d0f00}
+console.log(fastGuid())       // 21004214-9c2d-4730-813b-fbe35848fc00
+console.log(fastGuid('D'))    // 21004214-9c2d-4730-813b-fbe35848fc01
+console.log(fastGuid('N'))    // 210042149c2d4730813bfbe35848fc02
+console.log(fastGuid('B'))    // {21004214-9c2d-4730-813b-fbe35848fc03}
 
 // or
-console.log(fastGuid.D())     // 056548da-d1ba-49aa-a181-d5d6f29a7302
-console.log(fastGuid.N())     // a1d40e3af9a84ec8bf9afa746f2e0201
-console.log(fastGuid.B())     // {f908f12a-28bc-4a80-961f-62226b4d0f01}
+console.log(fastGuid.D())     // 21004214-9c2d-4730-813b-fbe35848fc04
+console.log(fastGuid.N())     // 210042149c2d4730813bfbe35848fc05
+console.log(fastGuid.B())     // {21004214-9c2d-4730-813b-fbe35848fc06}
 ```
 
 ## Note
